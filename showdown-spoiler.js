@@ -24,6 +24,8 @@
 
 'use strict';
 
+const SPOILER_CLASS = 'showdown-spoiler';
+
 const spoiler = function() {
   return [
     {
@@ -39,7 +41,7 @@ const spoiler = function() {
           }
           // Otherwise, apply the spoiler replacement
           return part.replace(/\|\|((?:(?!<\/).|\n)+?)\|\|/g, function(match, content) {
-            return '<span class="spoiler">' + content.trim() + '</span>';
+            return `<span class="${SPOILER_CLASS}">` + content.trim() + '</span>';
           });
         }).join('');
       }
@@ -50,7 +52,7 @@ const spoiler = function() {
 // Add Styling
 const showdownSpoilerStyle = document.createElement('style');
 showdownSpoilerStyle.innerHTML = `
-  .spoiler {
+  .${SPOILER_CLASS} {
     background-color: #000;
     color: #000;
     padding: 0 3px;
@@ -58,7 +60,7 @@ showdownSpoilerStyle.innerHTML = `
     user-select: none;
     border: 1px solid transparent;
   }
-  .spoiler.revealed {
+  .${SPOILER_CLASS}.revealed {
     background-color: transparent;
     color: inherit;
     border: 1px dotted #888;
@@ -73,7 +75,7 @@ if (typeof showdown !== 'undefined' && showdown.extension) {
 
 // Event listener for revealing spoilers
 document.addEventListener('click', function(e) {
-  const element = e.target.closest('.spoiler');
+  const element = e.target.closest(`.${SPOILER_CLASS}`);
   if (element) {
     element.classList.toggle('revealed');
   }
