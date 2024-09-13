@@ -21,7 +21,7 @@ var converter = new showdown.Converter({
 
 ## Usage
 
-This plugin uses the common double-pipe (||) format for hiding spoilers. 
+This plugin uses the common double-pipe (||) format for hiding spoilers. Inside of `<pre>` and `<code>` blocks, it has no effect.
 
 ```markdown
 If you have something that you want to hide, make it a ||spoiler||!
